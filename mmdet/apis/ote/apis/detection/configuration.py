@@ -126,6 +126,20 @@ class OTEDetectionConfig(ModelConfig):
         model_name = string_attribute("object detection model")
         data_pipeline = string_attribute("ote_data_pipeline.py")
 
+    @attrs
+    class __POTParameter(ParameterGroup):
+        header = string_attribute("POT Parameters")
+        description = header
+
+        stat_subset_size = configurable_integer(
+            header="Number of data samples",
+            description="Number of data samples used for post-training optimization ",
+            default_value=300,
+            min_value=1,
+            max_value=1000
+        )
+
     learning_parameters = add_parameter_group(__LearningParameters)
     algo_backend = add_parameter_group(__AlgoBackend)
     postprocessing = add_parameter_group(__Postprocessing)
+    pot_parameters = add_parameter_group(__POTParameter)
