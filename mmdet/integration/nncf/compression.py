@@ -216,6 +216,7 @@ def wrap_nncf_model(model,
 
     model.dummy_forward_fn = dummy_forward
     export_method = type(model).export
+    train_step_method = type(model).train_step
 
     if 'log_dir' in nncf_config:
         os.makedirs(nncf_config['log_dir'], exist_ok=True)
@@ -226,6 +227,7 @@ def wrap_nncf_model(model,
                                                           wrap_inputs_fn=wrap_inputs,
                                                           compression_state=compression_state)
     model.export = export_method.__get__(model)
+    #model.train_step = train_step_method.__get__(model)
 
     return compression_ctrl, model
 
