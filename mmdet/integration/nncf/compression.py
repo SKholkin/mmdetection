@@ -227,7 +227,7 @@ def wrap_nncf_model(model,
                                                           wrap_inputs_fn=wrap_inputs,
                                                           compression_state=compression_state)
     model.export = export_method.__get__(model)
-    #model.train_step = train_step_method.__get__(model)
+    model.train_step = train_step_method.__get__(model)
 
     return compression_ctrl, model
 
